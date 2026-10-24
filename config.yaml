@@ -1,0 +1,66 @@
+# Réglages du catalogue de musiques pour enfants (phase 1)
+
+region: FR                      # pays du public (écarte les vidéos bloquées en France)
+langue: fr
+cache_jours: 7                  # on ne redemande pas à YouTube avant 7 jours (économise le quota)
+
+filtres:
+  duree_min_s: 40               # écarte les jingles
+  duree_max_s: 600              # écarte les compilations de plusieurs heures (10 min max)
+  max_videos_par_chaine: 300    # les plus récentes
+  exiger_made_for_kids: true   # true = seulement les vidéos déclarées « conçues pour les enfants »
+  mots_exclus: [trailer, teaser, bande-annonce, bande annonce, extrait, interview, reaction, réaction,
+                episode, épisode, film complet, making of, vlog, unboxing, challenge, minecraft, roblox,
+                gameplay, asmr, tutoriel, tuto, podcast, concert, live, shorts, "#shorts", horreur,
+                creepy, scary, prank]
+
+# La catégorie qui a le plus de mots trouvés l'emporte (titre = x3, description = x1).
+# En cas d'égalité, la première dans cette liste gagne.
+# "recherches" sert uniquement à découvrir des chaînes à valider.
+categories:
+  noel:
+    nom: Noël
+    emoji: "🎄"
+    mots: [noël, sapin, père noël, jingle bells, petit papa noël]
+    recherches: [chansons de noël pour enfants]
+  berceuses:
+    nom: Berceuses
+    emoji: "🌙"
+    mots: [berceuse, dodo, endormir, sommeil, nuit, doudou, calme, relaxation, lullaby]
+    recherches: [berceuses pour bébé, berceuse pour endormir enfant]
+  apprendre:
+    nom: Apprendre
+    emoji: "🔤"
+    mots: [alphabet, chiffres, compter, couleurs, apprendre, formes, jours de la semaine, mois]
+    recherches: [chansons pour apprendre alphabet chiffres enfants]
+  animaux:
+    nom: Animaux
+    emoji: "🐮"
+    mots: [animaux, animal, ferme, vache, canard, grenouille, poule, souris]
+    recherches: [chansons animaux pour enfants]
+  danse:
+    nom: Danse
+    emoji: "💃"
+    mots: [danse, danser, bouger, dance, rythme, gigoter, sauter, tape des mains]
+    recherches: [chansons à danser pour enfants]
+  aventure:
+    nom: Histoires
+    emoji: "🏴‍☠️"
+    mots: [histoire, pirate, princesse, héros, conte, aventure]
+    recherches: [chansons histoires pour enfants]
+  bebe:
+    nom: Bébé
+    emoji: "👶"
+    mots: [bébé, bebe, éveil, eveil]
+    recherches: [musique éveil bébé, chansons pour bébé]
+  comptines:
+    nom: Comptines
+    emoji: "🎵"
+    mots: [comptine, comptines, rimes, chanson traditionnelle, frère jacques, au clair de la lune, une souris verte, alouette]
+    recherches: [comptines pour enfants, comptines françaises traditionnelles]
+
+# Tranche d'âge : la première qui correspond l'emporte, sinon "tous"
+ages:
+  "0-2": [bébé, bebe, berceuse, éveil, eveil]
+  "3-5": [maternelle, alphabet, chiffres, comptine, couleurs]
+  "6-9": [cp, ce1, karaoké, karaoke, paroles]
