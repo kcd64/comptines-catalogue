@@ -3,8 +3,6 @@
   python build_catalog.py decouvrir   -> data/chaines_trouvees.csv (à valider dans Excel)
   python build_catalog.py construire  -> data/catalogue.json
   python build_catalog.py status      -> quota utilisé et résumé du catalogue
-  python build_catalog.py publier     -> vérifie data/catalogue.json puis écrit public/catalogue.json (version publiée,
-                                         téléchargée par l'appli ; lancé chaque semaine par GitHub Actions)
 """
 import argparse
 import csv
@@ -186,45 +184,6 @@ def lire_csv(chemin):
     return list(csv.DictReader(texte.splitlines(), delimiter=";"))
 
 
-MIN_CHANSONS = 500        # en dessous, on considère que la construction a échoué
-PART_MIN_ANCIEN = 0.7     # le nouveau catalogue doit garder au moins 70 % de l'ancien
-TAILLE_MAX = 5_000_000    # octets
-
-
-def verifier_publication(nouveau, ancien=None, aujourdhui=None):
-    """Liste des problèmes qui empêchent de publier (liste vide = on peut publier). Fonction pure, testée."""
-    pb = []
-    ch = nouveau.get("chansons") or []
-    if not nouveau.get("categories"):
-        pb.append("aucune catégorie")
-    if len(ch) < MIN_CHANSONS:
-        pb.append(f"seulement {len(ch)} chansons (minimum {MIN_CHANSONS})")
-    if any(not c.get("id") or not c.get("titre") for c in ch):
-        pb.append("des chansons n'ont pas d'identifiant ou de titre")
-    if ancien and len(ch) < PART_MIN_ANCIEN * len(ancien.get("chansons") or []):
-        pb.append(f"{len(ch)} chansons contre {len(ancien['chansons'])} avant : baisse trop forte, publication refusée")
-    if aujourdhui and nouveau.get("genere_le") != aujourdhui:
-        pb.append(f"catalogue daté du {nouveau.get('genere_le')} et non d'aujourd'hui ({aujourdhui})")
-    if len(json.dumps(nouveau, ensure_ascii=False).encode("utf-8")) > TAILLE_MAX:
-        pb.append("catalogue trop volumineux")
-    return pb
-
-
-def publier(cfg, yt):
-    source = DATA / "catalogue.json"
-    if not source.exists():
-        sys.exit("❌ Lance d'abord : python build_catalog.py construire")
-    nouveau = json.loads(source.read_text(encoding="utf-8"))
-    sortie = Path("public") / "catalogue.json"
-    ancien = json.loads(sortie.read_text(encoding="utf-8")) if sortie.exists() else None
-    pb = verifier_publication(nouveau, ancien, time.strftime("%Y-%m-%d"))
-    if pb:
-        sys.exit("❌ Publication refusée : " + " ; ".join(pb))
-    sortie.parent.mkdir(exist_ok=True)
-    sortie.write_text(json.dumps(nouveau, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"✅ {len(nouveau['chansons'])} chansons publiées dans {sortie} ({sortie.stat().st_size // 1024} Ko)")
-
-
 # ---------- commandes ----------
 def decouvrir(cfg, yt):
     trouvees = {}
@@ -354,16 +313,16 @@ def controle(cfg, yt):
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
     p = argparse.ArgumentParser()
-    p.add_argument("cmd", choices=["decouvrir", "construire", "status", "controle", "publier"])
+    p.add_argument("cmd", choices=["decouvrir", "construire", "status", "controle"])
     args = p.parse_args()
     charger_env()
-    if args.cmd not in ("status", "controle", "publier") and not os.environ.get("YOUTUBE_API_KEY"):
+    if args.cmd not in ("status", "controle") and not os.environ.get("YOUTUBE_API_KEY"):
         sys.exit("❌ YOUTUBE_API_KEY manquante dans le fichier .env")
     cfg = yaml.safe_load(open("config.yaml", encoding="utf-8"))
     DATA.mkdir(exist_ok=True)
     yt = YouTube(os.environ.get("YOUTUBE_API_KEY", ""), cfg["cache_jours"])
     try:
-        {"decouvrir": decouvrir, "construire": construire, "status": status, "controle": controle, "publier": publier}[args.cmd](cfg, yt)
+        {"decouvrir": decouvrir, "construire": construire, "status": status, "controle": controle}[args.cmd](cfg, yt)
     except QuotaEpuise as e:
         sys.exit(f"⏸ {e}")
 
