@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Confidentialité Coucou Comptines</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap">
+<style>
+/* Mise en page : une colonne de lecture étroite, sommaire en haut, une section par sujet.
+   Couleurs : papier froid, encre bleu nuit (comme l'écran des histoires), or discret pour les repères. */
+:root {
+  --bg: #F6F7FB;
+  --surface: #FFFFFF;
+  --fg: #1B2142;
+  --muted: #5A6286;
+  --accent: #2B3A86;
+  --gold: #B8860B;
+  --line: #DADEEE;
+  --note: #EAEEFB;
+  --font: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1330; --surface: #171D45; --fg: #EEF0FF; --muted: #A4AAD6; --accent: #FFE08A; --gold: #FFE08A;
+    --line: #2E3770; --note: #1E2552; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1330; --surface: #171D45; --fg: #EEF0FF; --muted: #A4AAD6; --accent: #FFE08A; --gold: #FFE08A;
+  --line: #2E3770; --note: #1E2552; color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 17px; line-height: 1.65;
+  padding-block: 32px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+main { max-width: 44rem; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; min-width: 0; }
+h1 { font-size: clamp(1.9rem, 6vw, 2.6rem); line-height: 1.15; font-weight: 800; margin: 0; text-wrap: balance; color: var(--accent); }
+h2 { font-size: 1.35rem; font-weight: 800; margin: 0 0 8px; text-wrap: balance; scroll-margin-top: 16px; }
+p { margin: 0 0 12px; max-width: 65ch; }
+ul { margin: 0 0 12px; padding-left: 1.2em; max-width: 65ch; }
+li { margin-bottom: 6px; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
+.date { color: var(--muted); font-size: 0.95rem; margin: 6px 0 0; }
+.resume { background: var(--note); border-radius: 14px; padding: 18px 20px; }
+.resume h2 { margin-bottom: 10px; }
+.resume ul { margin: 0; }
+nav { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 14px 0; }
+nav ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 18px; }
+nav li { margin: 0; }
+nav a { font-weight: 600; font-size: 0.95rem; }
+section { min-width: 0; }
+.tableau { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 34rem; font-size: 0.95rem; line-height: 1.45; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+th { font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+tr:last-child td { border-bottom: 0; }
+.mail { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.mail code { font-family: inherit; font-weight: 800; font-size: 1.1rem; background: var(--note); padding: 6px 12px; border-radius: 8px; user-select: all; overflow-wrap: anywhere; }
+button { font: inherit; font-weight: 800; font-size: 0.95rem; color: var(--bg); background: var(--accent); border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+footer { color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); padding-top: 16px; }
+</style>
+
+<main>
+  <header>
+    <h1>Politique de confidentialité de Coucou Comptines</h1>
+    <p class="date">Dernière mise à jour : 24 octobre 2026</p>
+  </header>
+
+  <div class="resume">
+    <h2>En bref</h2>
+    <ul>
+      <li>Pas de compte, pas de publicité, pas de suivi, pas d’outil de statistiques dans l’appli.</li>
+      <li>Vos favoris, vos listes, vos réglages et vos histoires restent sur votre téléphone.</li>
+      <li>Pour inventer une histoire du soir, les choix de l’enfant et son prénom (facultatif) sont envoyés à notre serveur, puis à un service d’intelligence artificielle qui écrit le texte.</li>
+      <li>Les chansons sont lues par le lecteur officiel de YouTube.</li>
+    </ul>
+  </div>
+
+  <nav aria-label="Sommaire">
+    <ul>
+      <li><a href="#responsable">Responsable</a></li>
+      <li><a href="#telephone">Sur votre téléphone</a></li>
+      <li><a href="#chansons">Les chansons</a></li>
+      <li><a href="#histoires">Les histoires du soir</a></li>
+      <li><a href="#signalement">Signalement</a></li>
+      <li><a href="#achats">Achats</a></li>
+      <li><a href="#enfants">Enfants</a></li>
+      <li><a href="#droits">Vos droits</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="responsable">
+    <h2>Qui est responsable de l’appli</h2>
+    <p>Coucou Comptines est éditée par saucissonpalois, développeur indépendant, joignable à l’adresse indiquée en bas de cette page. L’appli s’adresse aux parents : ce sont eux qui choisissent les chansons et créent les histoires pour leurs enfants.</p>
+  </section>
+
+  <section id="telephone">
+    <h2>Ce qui reste sur votre téléphone</h2>
+    <p>Ces informations sont enregistrées uniquement sur votre appareil et ne nous sont jamais envoyées :</p>
+    <ul>
+      <li>vos chansons favorites et vos listes de lecture ;</li>
+      <li>le thème choisi, le nombre de chansons choisies dans la journée et l’état de votre achat Premium ;</li>
+      <li>les histoires créées (texte, choix, prénom saisi), réécoutables hors connexion, et celles que vous avez gardées avec le cœur ;</li>
+      <li>vos réglages de volume pour la voix et la musique.</li>
+    </ul>
+    <p>Désinstaller l’appli efface toutes ces données.</p>
+  </section>
+
+  <section id="chansons">
+    <h2>Les chansons et YouTube</h2>
+    <p>Les chansons sont lues par le lecteur intégré officiel de YouTube. Nous n’avons ni copie ni téléchargement des vidéos. Pendant la lecture, YouTube (Google) peut recevoir des informations techniques sur votre appareil, selon sa propre politique.</p>
+    <p>Coucou Comptines utilise les services API YouTube. En utilisant l’appli, vous acceptez les <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">Conditions d’utilisation de YouTube</a> et la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Politique de confidentialité de Google</a>.</p>
+  </section>
+
+  <section id="histoires">
+    <h2>Les histoires du soir</h2>
+    <p>Quand vous demandez une histoire, l’appli envoie votre demande à notre serveur, hébergé chez Cloudflare. Le serveur la transmet à Anthropic, qui fournit l’intelligence artificielle (Claude) chargée d’écrire le texte. La voix qui lit l’histoire est celle de votre téléphone ; nous n’envoyons aucun son. Cloudflare traite techniquement la connexion (par exemple l’adresse IP) pour faire fonctionner le serveur, et Anthropic traite la demande selon ses propres conditions : nous ne les contrôlons pas.</p>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr><th>Donnée</th><th>Pourquoi</th><th>Conservation chez nous</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Choix de l’enfant : héros, lieu, moment, objet, fin, longueur</td><td>Écrire l’histoire</td><td>Non conservés</td></tr>
+          <tr><td>Prénom de l’enfant (facultatif)</td><td>Le faire apparaître dans l’histoire</td><td>Non conservé</td></tr>
+          <tr><td>Identifiant aléatoire de l’appareil, sans lien avec votre identité</td><td>Limiter les abus : nombre d’histoires par jour</td><td>Un compteur, effacé automatiquement après 2 jours</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:12px">Nous vous conseillons de ne saisir que le prénom, jamais de nom de famille ni d’autre information personnelle. Les histoires sont écrites par une intelligence artificielle avec des consignes strictes (douces, sans violence ni peur), mais une erreur reste possible. Vous pouvez toujours la signaler depuis l’histoire.</p>
+  </section>
+
+  <section id="signalement">
+    <h2>Signaler une histoire</h2>
+    <p>Le bouton « Signaler » dans chaque histoire envoie à notre serveur le motif choisi, le titre, un extrait du texte (qui peut contenir le prénom), les choix et l’identifiant aléatoire de l’appareil. Nous gardons ce signalement 30 jours pour vérifier l’histoire et améliorer les consignes, puis il est effacé automatiquement.</p>
+  </section>
+
+  <section id="achats">
+    <h2>Achat Premium</h2>
+    <p>L’achat est géré par Google Play (ou l’App Store). Nous ne recevons ni votre numéro de carte ni vos coordonnées de paiement.</p>
+  </section>
+
+  <section id="enfants">
+    <h2>Enfants</h2>
+    <p>L’appli est conçue pour être utilisée par un parent ou sous sa surveillance. Elle ne contient pas de publicité, ne crée pas de compte et ne collecte pas d’information sur l’enfant au-delà de ce qui est décrit ici. Le prénom n’est jamais obligatoire : c’est au parent de décider de le saisir.</p>
+  </section>
+
+  <section id="droits">
+    <h2>Vos droits et la suppression des données</h2>
+    <p>Presque toutes les données restent sur votre téléphone : vous les contrôlez et vous les effacez en désinstallant l’appli. Pour le peu de données qui passe par notre serveur (décrites plus haut), vous pouvez nous demander l’accès, la rectification ou la suppression en nous écrivant. Comme ces données ne contiennent pas votre identité, nous pourrons vous demander l’identifiant de l’appareil ou la date du signalement pour retrouver la bonne entrée. Si vous êtes en Europe, vous pouvez aussi saisir votre autorité de protection des données (en France, la CNIL).</p>
+  </section>
+
+  <section id="contact">
+    <h2>Nous contacter</h2>
+    <p>Pour toute question, demande ou signalement :</p>
+    <div class="mail">
+      <code id="adresse">coucoucomptines@outlook.fr</code>
+      <button type="button" id="copier">Copier l’adresse</button>
+    </div>
+    <p id="retour" role="status" style="margin-top:8px;color:var(--muted)" hidden>Adresse copiée.</p>
+  </section>
+
+  <footer>
+    Cette politique peut évoluer, par exemple si une nouvelle fonction utilise d’autres données. La date en haut de la page indique la dernière version.
+  </footer>
+</main>
+
+<script>
+document.getElementById('copier').addEventListener('click', function () {
+  var adresse = document.getElementById('adresse');
+  var retour = document.getElementById('retour');
+  function ok() { retour.textContent = 'Adresse copiée.'; retour.hidden = false; }
+  function selection() {
+    var r = document.createRange(); r.selectNodeContents(adresse);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    retour.textContent = 'Adresse sélectionnée : copiez-la avec votre menu.'; retour.hidden = false;
+  }
+  try { navigator.clipboard.writeText(adresse.textContent).then(ok, selection); } catch (e) { selection(); }
+});
+</script>
+
+</html>
